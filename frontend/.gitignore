@@ -1,0 +1,80 @@
+# ===============================
+# Node / Next.js (Frontend)
+# ===============================
+node_modules/
+.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+coverage/
+
+# Next.js output
+.next/
+out/
+
+# production build
+build/
+
+# misc
+.DS_Store
+*.pem
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# environment files
+.env*
+.vercel/
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+
+# ===============================
+# Python / FastAPI Backend
+# ===============================
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.db
+*.sqlite3
+instance/
+.pytest_cache/
+dist/
+build/
+*.egg-info/
+
+# Virtual environment
+venv/
+env/
+ENV/
+env.bak/
+
+# VSCode Python settings
+.vscode/
+
+# dotenv ignored for backend too
+backend/.env
+backend/.env.*
+
+# Local database dumps
+*.sql
+
+# ===============================
+# OS / Editor junk
+# ===============================
+Thumbs.db
+.idea/
+*.swp
+*.swo
+*~
