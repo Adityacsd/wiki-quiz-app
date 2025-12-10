@@ -1,80 +1,65 @@
-```md
-# 📘 Wiki Quiz Generator  
-**A full-stack application focused primarily on backend engineering**, using FastAPI, PostgreSQL, and Gemini to automatically generate quizzes from Wikipedia URLs. The project includes a lightweight Next.js frontend to visualize quizzes and past history.
+# Wiki Quiz Generator
+
+A full-stack application focused primarily on backend engineering.  
+It processes Wikipedia article URLs, scrapes their content, generates quizzes using the Gemini API, and stores everything in PostgreSQL.  
+The frontend (Next.js) provides a minimal, clean interface for generating and viewing quizzes.
 
 ---
 
-## 🧩 Overview
+## Overview
 
-Wiki Quiz Generator processes any valid **Wikipedia article URL**, scrapes the content, and uses **Google Gemini AI** to generate:
+Wiki Quiz Generator allows users to:
 
-- Article summary  
-- Related topics  
-- Multiple-choice questions  
-- Difficulty levels  
-- Explanations  
+- Input any valid Wikipedia article URL
+- Automatically scrape the article
+- Generate a quiz using Google Gemini
+- Store quizzes in PostgreSQL for future access
+- View past quizzes from history
 
-All processed articles and quizzes are **stored in PostgreSQL**, enabling users to revisit **Past Quizzes** (History tab).  
-While the project includes a UI, **the core emphasis is on backend architecture, data modelling, LLM integration, and persistent storage**, as expected from a backend engineering assignment.
-
----
-
-## ⚙️ Features
-
-### **Backend**
-- FastAPI server with clean routes:
-  - `POST /generate_quiz`
-  - `GET /quiz/{id}`
-  - `GET /history`
-- Robust scraper using BeautifulSoup
-- Gemini LLM integration for quiz generation
-- PostgreSQL database for caching & persistent history
-- Data models using SQLAlchemy ORM
-- Prevents duplicate processing of the same URL (cache-first logic)
-- Clean separation of concerns:
-  - `main.py`
-  - `scraper.py`
-  - `models.py`
-  - `llm_client.py`
-  - `database.py`
-  - `prompts.py`
+The primary focus is backend design, API development, and persistent storage.  
+The UI is intentionally minimal as required:  
+"Clear, minimal, and visually organized layout; both tabs functional."
 
 ---
 
-### **Frontend**
-- Next.js app with:
-  - **Generate Quiz** tab  
-  - **Past Quizzes** tab  
-  - Quiz flashcards with simple UI  
-- Uses clean, minimal HTML/CSS (no Tailwind)
+## Features
+
+### Backend
+
+- FastAPI server
+- Endpoints:
+  - POST /generate_quiz
+  - GET /quiz/{id}
+  - GET /history
+- BeautifulSoup-based scraper
+- Gemini AI integration
+- PostgreSQL storage
+- Caching mechanism: article is not processed twice
+- SQLAlchemy ORM models
+- Clean separation of logic into files:
+  - main.py
+  - scraper.py
+  - llm_client.py
+  - prompts.py
+  - models.py
+  - database.py
+
+### Frontend
+
+- Next.js app
+- Tabs:
+  - Generate Quiz
+  - Past Quizzes
+- Quiz viewer page
+- Minimal CSS layout
 
 ---
 
-## 🛠️ Tech Stack
-
-### **Backend**
-- Python 3.10+
-- FastAPI
-- PostgreSQL
-- SQLAlchemy ORM
-- Pydantic
-- Google Gemini API
-- BeautifulSoup4
-- Requests
-
-### **Frontend**
-- Next.js
-- React
-- CSS
-
----
-
-## 📁 Project Structure
+## Project Structure
 
 ```
-
 wiki-quiz-app/
-│
+|
 ├── backend/
 │   ├── main.py
 │   ├── database.py
@@ -85,180 +70,136 @@ wiki-quiz-app/
 │   ├── test_models.py
 │   ├── .env.example
 │   └── requirements.txt
-│
+|
 └── frontend/
-└── wiki_quiz_app/
-├── pages/
-│   ├── index.js
-│   ├── history.js
-│   ├── quiz/[id].js
-│   ├── _app.js
-│   └── _document.js
-├── components/NavBar.js
-├── styles/globals.css
-└── package.json
-
+    └── wiki_quiz_app/
+        ├── pages/
+        │   ├── index.js
+        │   ├── history.js
+        │   ├── quiz/[id].js
+        │   ├── _app.js
+        │   └── _document.js
+        ├── components/NavBar.js
+        ├── styles/globals.css
+        └── package.json
 ```
 
 ---
 
-## 🛠️ Backend Setup
+## Backend Setup
 
-### **1. Install Python packages**
-Inside `/backend`:
+### 1. Install dependencies
+
+Navigate to the backend folder:
 
 ```
-
+cd backend
 pip install -r requirements.txt
-
 ```
 
-### **2. Setup PostgreSQL**
-
-Create the database:
+### 2. Create the PostgreSQL database
 
 ```
-
 CREATE DATABASE wiki_quiz_db;
-
 ```
 
-### **3. Create `.env` file**
-Inside `/backend`:
+### 3. Create .env file
+
+Inside backend folder:
 
 ```
-
-GEMINI_API_KEY=YOUR_KEY
+GEMINI_API_KEY=YOUR_API_KEY
 DATABASE_URL=postgresql://postgres:YOUR_PASSWORD@localhost:5432/wiki_quiz_db
-
 ```
 
-### **4. Start Backend**
+### 4. Run the backend server
 
 ```
-
 uvicorn main:app --reload
-
 ```
 
 Backend runs at:
 
 ```
-
-[http://127.0.0.1:8000](http://127.0.0.1:8000)
-
+http://127.0.0.1:8000
 ```
 
 ---
 
-## 🖥️ Frontend Setup
+## Frontend Setup
 
-### **1. Go to frontend folder**
+### 1. Navigate to frontend directory
 
 ```
-
 cd frontend/wiki_quiz_app
-
 ```
 
-### **2. Install Node packages**
+### 2. Install Node modules
 
 ```
-
 npm install
-
 ```
 
-### **3. Run Frontend**
+### 3. Start the development server
 
 ```
-
 npm run dev
-
 ```
 
 Frontend runs at:
 
 ```
-
-[http://localhost:3000](http://localhost:3000)
-
+http://localhost:3000
 ```
 
 ---
 
-## ▶️ How to Use
+## Usage Guide
 
-### **1. Go to frontend in browser**
-```
+### 1. Generate Quiz (Tab 1)
+- Open the app
+- Paste a Wikipedia URL
+- Click "Generate Quiz"
+- You will be redirected to the quiz page
 
-[http://localhost:3000](http://localhost:3000)
-
-```
-
-### **2. Tab 1 – Generate Quiz**
-- Paste a Wikipedia URL  
-- Click **Generate Quiz**  
-- Auto-redirects to quiz page  
-
-### **3. Tab 2 – Past Quizzes**
-- View all previously processed URLs  
-- Click **View Quiz** to reopen  
+### 2. Past Quizzes (Tab 2)
+- Shows all previously generated quizzes stored in PostgreSQL
+- Click "View Quiz" to open any past quiz
 
 ---
 
-## 🧪 Testing
+## Python Requirements
 
-To validate SQLAlchemy models:
-
-```
-
-pytest test_models.py
+(Automatically installed from `requirements.txt`)
 
 ```
-
----
-
-## 📦 Requirements (Python)
-
-```
-
 fastapi
 uvicorn
 sqlalchemy
 psycopg2
-beautifulsoup4
 requests
+beautifulsoup4
 python-dotenv
 google-generativeai
-
 ```
 
-(Already included in `requirements.txt`.)
+---
+
+## Notes
+
+The project focuses mainly on:
+
+- Backend architecture
+- Data modeling
+- API development
+- LLM output handling
+- Persistent database storage
+
+The frontend is intentionally simple as per assignment instructions.
 
 ---
 
-## 🚀 Deployment Notes
+## License
 
-- Backend & frontend can be deployed separately.  
-- Ensure environment variables for Gemini + PostgreSQL are set.  
-- CORS enabled for development.
+This project is for assignment and evaluation purposes only.
 
----
-
-## 📚 Notes
-
-This project’s emphasis was on:
-- Clean backend architecture  
-- Stable database integration  
-- LLM output handling  
-- JSON parsing  
-- Persistent cache system  
-
-The frontend is intentionally minimal as per assignment guidelines:  
-**“Clear, minimal, and visually organized UI; both tabs functional.”**
-
----
-
- 
-```
